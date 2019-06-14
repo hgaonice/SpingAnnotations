@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- 此文件为通用mapper生成代码的配置 -->
+<!-- 配置文件信息见：https://mapperhelper.github.io/docs/3.usembg/ -->
+<generatorConfiguration>
+
+	<!-- 引入配置文件 -->  
+    <properties resource="jdbc.properties"/>  
+    
+    <context id="JDBCGenerator" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <!-- <property name="caseSensitive" value="true"/> -->
+        </plugin>
+        
+        <!-- 自定义注解实现类的类全路径 // TODO -->
+        <commentGenerator type="prologlwtb.util.MyCommentGenerator">
+        </commentGenerator>
+        
+	    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+	                    connectionURL="${jdbc.url}"
+	                    userId="${jdbc.username}"
+	                    password="${jdbc.password}">
+	                    <!-- 仅对oracle数据库 -->
+	                    <!--<property name="remarksReporting" value="true"></property>-->
+	    </jdbcConnection>
+	        
+	    <!-- type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl" -->
+	    <javaTypeResolver>
+	        <property name="forceBigDecimals" value="false" />
+	    </javaTypeResolver>
+	
+	    <!--model实体生成路径 C:\Users\Administrator\Desktop -->
+	    <javaModelGenerator targetPackage="prologlwtb.temp" targetProject="src/main/java"/> 
+	    
+	    <!--*Mapper.java生成路径 -->
+	    <sqlMapGenerator targetPackage="prologlwtb.temp"  targetProject="src/main/java"/>
+	    
+	    <!--*Mapper.xml生成路径 -->
+	    <javaClientGenerator targetPackage="prologlwtb.temp" targetProject="src/main/java" type="XMLMAPPER" />
+	
+	    <table tableName="SYS_DATABANK" domainObjectName="SysDatabankModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+	    </table>
+    
+    </context>
+</generatorConfiguration>
